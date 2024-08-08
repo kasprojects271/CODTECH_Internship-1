@@ -1,1 +1,122 @@
-
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecurePass Validator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://media.licdn.com/dms/image/D4D12AQHYJzVWNNSCVA/article-cover_image-shrink_720_1280/0/1691347033939?e=2147483647&v=beta&t=_ZzSXIr64J3-OiSmepaoimC-9odMoMscCrQIQKNGteQ'); /* Replace with your image URL */
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+            position: relative; 
+            z-index: 1; 
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label, input {
+            margin-bottom: 15px;
+        }
+        input[type="password"] {
+            height: 40px;
+            font-size: 20px;
+            padding: 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .password {
+            font-size: 1.1em;
+            color: #333;
+            text-align: center;
+            word-wrap: break-word;
+            margin-top: 20px;
+        }
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SecurePass Validator</h1>
+        <form method="post">
+            <label for="password">Enter your password:</label>
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="Check Strength">
+        </form>
+        {% if password_strength %}
+            <div class="result">
+                Password strength: {{ password_strength }}
+            </div>
+        {% endif %}
+        {% if password_input %}
+            <div class="password">
+                Entered password: {{ password_input }}
+            </div>
+        {% endif %}
+        {% if password_strength == "Weak" %}
+            <div class="image-container">
+                <img src="https://i.gifer.com/CjK7.gif" alt="Weak Password" width="300px" height="500px">
+                <p>Your password is weak. Consider updating it to improve security.</p>
+            </div>
+        {% elif password_strength == "Strong" %}
+            <div class="image-container">
+                <img src="https://i.pinimg.com/originals/31/43/27/314327492936f7dd492d44fef1a0eaa7.gif" alt="Strong Password" width="300px" height="500px">
+                <p>Your password is strong. Good job!</p>
+            </div>
+        {% elif password_strength == "Moderate" %}
+            <div class="image-container">
+                <img src="https://cdn.pixabay.com/animation/2022/09/28/13/39/13-39-31-176_512.gif" alt="Intermediate Password" width="300px" height="500px">
+                <p>Your password is intermediate. Consider adding more characters or symbols.</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
